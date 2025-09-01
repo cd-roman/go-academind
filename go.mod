@@ -1,3 +1,3 @@
-module example.com/go-app
+module example.com/investment-calculator
 
 go 1.25.0
