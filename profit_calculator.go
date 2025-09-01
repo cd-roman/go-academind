@@ -1,26 +1,32 @@
-// package main
+package main
 
-// import (
-// 	"fmt"
-// )
+import (
+	"fmt"
+)
 
-// func main() {
-// 	var revenue, expenses, taxRate float64
+func main() {
+	revenue := getUserInput("Enter your revenue: ")
+	expenses := getUserInput("Enter your expenses: ")
+	taxRate := getUserInput("Enter your tax rate: ")
 
-// 	fmt.Print("Enter your revenue: ")
-// 	fmt.Scan(&revenue)
+	earningsBeforeTax, profit, earningsRatio := calculateFinancials(revenue, expenses, taxRate)
 
-// 	fmt.Print("Enter your expenses: ")
-// 	fmt.Scan(&expenses)
+	fmt.Printf("Your earnings before tax: %.2f\n", earningsBeforeTax)
+	fmt.Printf("Your profit after tax: %.2f\n", profit)
+	fmt.Printf("Your earnings ratio: %.2f\n", earningsRatio)
+}
 
-// 	fmt.Print("Enter your tax rate: ")
-// 	fmt.Scan(&taxRate)
+func getUserInput(infoText string) float64 {
+	var userInput float64
+	fmt.Print(infoText)
+	fmt.Scan(&userInput)
+	return userInput
+}
 
-// 	earningsBeforeTax := revenue - expenses
-// 	profit := earningsBeforeTax * (1 - taxRate/100)
-// 	earningsRatio := earningsBeforeTax / profit
+func calculateFinancials(revenue, expenses, taxRate float64) (float64, float64, float64) {
+	earningsBeforeTax := revenue - expenses
+	profit := earningsBeforeTax * (1 - taxRate/100)
+	earningsRatio := earningsBeforeTax / profit
 
-// 	fmt.Println("Your earnings before tax:", earningsBeforeTax)
-// 	fmt.Println("Your profit after tax:", profit)
-// 	fmt.Println("Your earnings ratio:", earningsRatio)
-// }
+	return earningsBeforeTax, profit, earningsRatio
+}
