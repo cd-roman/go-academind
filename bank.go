@@ -7,30 +7,35 @@ import (
 func main() {
 	var accountBalance float64 = 1000.00
 
-	fmt.Println("Welcome to the Bank!")
-	fmt.Println("What do you want to do?")
-	fmt.Println("1. Check Balance")
-	fmt.Println("2. Deposit Money")
-	fmt.Println("3. Withdraw Money")
-	fmt.Println("4. Exit")
+	fmt.Println("Welcome to Go Bank!")
 
-	var choice int
-	fmt.Print("Your choice: ")
-	fmt.Scan(&choice)
-
-	if choice == 1 {
-		checkBalance(accountBalance)
-	} else if choice == 2 {
-		depositMoney(accountBalance)
-	} else if choice == 3 {
-		withdrawMoney(accountBalance)
-	} else if choice == 4 {
-		fmt.Println("Exiting...")
-		return
-	} else {
-		fmt.Println("Invalid choice. Please try again.")
-	}
+	for {
+		fmt.Println("What do you want to do?")
+		fmt.Println("1. Check Balance")
+		fmt.Println("2. Deposit Money")
+		fmt.Println("3. Withdraw Money")
+		fmt.Println("4. Exit")
 	
+		var choice int
+		fmt.Print("Your choice: ")
+		fmt.Scan(&choice)
+	
+		if choice == 1 {
+			checkBalance(accountBalance)
+		} else if choice == 2 {
+			accountBalance = depositMoney(accountBalance)
+		} else if choice == 3 {
+			accountBalance = withdrawMoney(accountBalance)
+		} else if choice == 4 {
+			fmt.Println("Exiting...")
+			break
+		} else {
+			fmt.Println("Invalid choice. Please try again.")
+		}
+	}
+
+	fmt.Println("Thank you for using Go Bank!")
+
 }
 
 func checkBalance(balance float64) {
@@ -65,7 +70,7 @@ func withdrawMoney(balance float64) float64 {
 		balance -= amount
 		fmt.Printf("You have withdrawn: %.2f\n", amount)
 	}
-	
+
 	fmt.Printf("Your new balance is: %.2f\n", balance)
 	return balance
 }
