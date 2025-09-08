@@ -1,38 +1,15 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
+
+	"example.com/bank/fileops"
 )
 
 const accountBalanceFile = "balance.txt"
 
-func getFloatFromFile(fileName string, defaultValue float64) (float64, error) {
-	data, err := os.ReadFile(fileName)
-
-	if err != nil {
-		return defaultValue, errors.New("Failed to find file")
-	}
-
-	valueText := string(data)
-	value, err := strconv.ParseFloat(valueText, 64)
-
-	if err != nil {
-		return defaultValue, errors.New("Failed to parse stored value")
-	}
-
-	return value, nil
-}
-
-func writeFloatToFile(value float64, fileName string) {
-	valueText := fmt.Sprint(value)
-	os.WriteFile(fileName, []byte(valueText), 0644)
-}
-
 func main() {
-	var accountBalance, err = getFloatFromFile(accountBalanceFile, 0)
+	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile, 0)
 
 	if err != nil {
 		fmt.Println("ERROR")
@@ -84,7 +61,7 @@ func depositMoney(balance float64) float64 {
 	balance += amount
 	fmt.Printf("You have deposited: %.2f\n", amount)
 	fmt.Printf("Your new balance is: %.2f\n", balance)
-	writeFloatToFile(balance, accountBalanceFile)
+	fileops.WriteFloatToFile(balance, accountBalanceFile)
 	return balance
 }
 
@@ -102,7 +79,7 @@ func withdrawMoney(balance float64) float64 {
 	}
 
 	fmt.Printf("Your new balance is: %.2f\n", balance)
-	writeFloatToFile(balance, accountBalanceFile)
+	fileops.WriteFloatToFile(balance, accountBalanceFile)
 	return balance
 }
 
