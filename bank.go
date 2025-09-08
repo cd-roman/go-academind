@@ -1,88 +1,88 @@
-package main
+// package main
 
-import (
-	"fmt"
+// import (
+// 	"fmt"
 
-	"example.com/bank/fileops"
-	"github.com/Pallinder/go-randomdata"
-)
+// 	"example.com/bank/fileops"
+// 	"github.com/Pallinder/go-randomdata"
+// )
 
-const accountBalanceFile = "balance.txt"
+// const accountBalanceFile = "balance.txt"
 
-func main() {
-	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile, 0)
+// func main() {
+// 	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile, 0)
 
-	if err != nil {
-		fmt.Println("ERROR")
-		fmt.Println(err)
-		fmt.Println("--------------")
-		// panic("Failed to get account balance")
-	}
+// 	if err != nil {
+// 		fmt.Println("ERROR")
+// 		fmt.Println(err)
+// 		fmt.Println("--------------")
+// 		// panic("Failed to get account balance")
+// 	}
 
-	fmt.Println("Welcome to Go Bank!")
-	fmt.Println("Reach us 24/7 at:", randomdata.PhoneNumber())
+// 	fmt.Println("Welcome to Go Bank!")
+// 	fmt.Println("Reach us 24/7 at:", randomdata.PhoneNumber())
 
-	for {
-		presentOptions()
+// 	for {
+// 		presentOptions()
 
-		var choice int
-		fmt.Print("Your choice: ")
-		fmt.Scan(&choice)
+// 		var choice int
+// 		fmt.Print("Your choice: ")
+// 		fmt.Scan(&choice)
 
-		switch choice {
-		case 1:
-			checkBalance(accountBalance)
-		case 2:
-			accountBalance = depositMoney(accountBalance)
-		case 3:
-			accountBalance = withdrawMoney(accountBalance)
-		case 4:
-			fmt.Println("Exiting...")
-			fmt.Println("Thank you for using Go Bank!")
-			return
-		default:
-			fmt.Println("Invalid choice. Please try again.")
-		}
-	}
-}
+// 		switch choice {
+// 		case 1:
+// 			checkBalance(accountBalance)
+// 		case 2:
+// 			accountBalance = depositMoney(accountBalance)
+// 		case 3:
+// 			accountBalance = withdrawMoney(accountBalance)
+// 		case 4:
+// 			fmt.Println("Exiting...")
+// 			fmt.Println("Thank you for using Go Bank!")
+// 			return
+// 		default:
+// 			fmt.Println("Invalid choice. Please try again.")
+// 		}
+// 	}
+// }
 
-func checkBalance(balance float64) {
-	fmt.Printf("Your current balance is: %.2f\n", balance)
-}
+// func checkBalance(balance float64) {
+// 	fmt.Printf("Your current balance is: %.2f\n", balance)
+// }
 
-func depositMoney(balance float64) float64 {
-	var amount float64
-	fmt.Print("Enter amount to deposit: ")
-	fmt.Scan(&amount)
+// func depositMoney(balance float64) float64 {
+// 	var amount float64
+// 	fmt.Print("Enter amount to deposit: ")
+// 	fmt.Scan(&amount)
 
-	if amount <= 0 {
-		fmt.Println("Invalid deposit amount. Must be greater than 0.")
-		return balance
-	}
+// 	if amount <= 0 {
+// 		fmt.Println("Invalid deposit amount. Must be greater than 0.")
+// 		return balance
+// 	}
 
-	balance += amount
-	fmt.Printf("You have deposited: %.2f\n", amount)
-	fmt.Printf("Your new balance is: %.2f\n", balance)
-	fileops.WriteFloatToFile(balance, accountBalanceFile)
-	return balance
-}
+// 	balance += amount
+// 	fmt.Printf("You have deposited: %.2f\n", amount)
+// 	fmt.Printf("Your new balance is: %.2f\n", balance)
+// 	fileops.WriteFloatToFile(balance, accountBalanceFile)
+// 	return balance
+// }
 
-func withdrawMoney(balance float64) float64 {
-	var amount float64
-	fmt.Print("Enter amount to withdraw: ")
-	fmt.Scan(&amount)
+// func withdrawMoney(balance float64) float64 {
+// 	var amount float64
+// 	fmt.Print("Enter amount to withdraw: ")
+// 	fmt.Scan(&amount)
 
-	if amount > balance {
-		fmt.Println("Insufficient funds.")
-		return balance
-	} else {
-		balance -= amount
-		fmt.Printf("You have withdrawn: %.2f\n", amount)
-	}
+// 	if amount > balance {
+// 		fmt.Println("Insufficient funds.")
+// 		return balance
+// 	} else {
+// 		balance -= amount
+// 		fmt.Printf("You have withdrawn: %.2f\n", amount)
+// 	}
 
-	fmt.Printf("Your new balance is: %.2f\n", balance)
-	fileops.WriteFloatToFile(balance, accountBalanceFile)
-	return balance
-}
+// 	fmt.Printf("Your new balance is: %.2f\n", balance)
+// 	fileops.WriteFloatToFile(balance, accountBalanceFile)
+// 	return balance
+// }
 
 
